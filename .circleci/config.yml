@@ -1,7 +1,59 @@
 version: 2
 jobs:
+  build:
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build example
+          command: |
+            echo 'Build finished!'
+
+  deploy_prd:
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - deploy:
+          name: Deploy Prod example
+          command: |
+            echo "CIRCLE_BRANCH: ${CIRCLE_BRANCH}"
+            echo "CIRCLE_TAG: ${CIRCLE_TAG}"
+
+  deploy_dev:
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - deploy:
+          name: Deploy Dev example
+          command: |
+            echo "CIRCLE_BRANCH: ${CIRCLE_BRANCH}"
+            echo "CIRCLE_TAG: ${CIRCLE_TAG}"
 
 workflows:
   version: 2
   deploy:
     jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+                - develop
+      - deploy_prd:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+      - deploy_dev:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore: /.*/
