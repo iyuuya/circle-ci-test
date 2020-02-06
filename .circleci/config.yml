@@ -21,6 +21,12 @@ jobs:
             echo $CONTEXT_TEST
             echo $CONTEXT_TEST_ENV
       - run:
+          name: Context test03 (eval)
+          command: |
+            eval "${CONTEXT_TEST_ENV}"
+            echo $CONTEXT_TEST
+            echo $CONTEXT_TEST_ENV
+      - run:
           name: Build example
           command: |
             echo 'Build finished!'
