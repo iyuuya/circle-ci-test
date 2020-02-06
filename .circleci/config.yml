@@ -3,6 +3,9 @@ jobs:
   build:
     docker:
       - image: docker:17.05.0-ce-git
+    environment:
+      CONTEXT_TEST: 0
+      CONTEXT_TEST_ENV: ${CONTEXT_TEST}-ENV
     steps:
       - checkout
       - setup_remote_docker
@@ -11,10 +14,12 @@ jobs:
           command: |
             export CONTEXT_TEST=1
             echo $CONTEXT_TEST
+            echo $CONTEXT_TEST_ENV
       - run:
           name: Context test02
           command: |
             echo $CONTEXT_TEST
+            echo $CONTEXT_TEST_ENV
       - run:
           name: Build example
           command: |
