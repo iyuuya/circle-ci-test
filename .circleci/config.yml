@@ -6,7 +6,7 @@ jobs:
     environment:
       CONTEXT_TEST: 0
       CONTEXT_TEST_ENV: ${CONTEXT_TEST}-ENV
-      EVAL_ECONTEXT_TEST_ENV: export HOGE="${CONTEXT_TEST_ENV}"
+      EVAL_ECONTEXT_TEST_ENV: export HOGE="$(eval "${CONTEXT_TEST_ENV}")"
     steps:
       - checkout
       - setup_remote_docker
