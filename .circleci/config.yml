@@ -7,6 +7,15 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
+          name: Context test01
+          command: |
+            export CONTEXT_TEST=1
+            echo $CONTEXT_TEST
+      - run:
+          name: Context test02
+          command: |
+            echo $CONTEXT_TEST
+      - run:
           name: Build example
           command: |
             echo 'Build finished!'
