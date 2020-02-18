@@ -11,10 +11,11 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Display SHA1
+          name: Display SHA1, name-rev and branch-contains
           command: |
-            echo "{{ .Environment.CIRCLE_SHA1 }}"
             echo "$CIRCLE_SHA1"
+            git name-rev $CIRCLE_SHA1
+            git branch --contains $CIRCLE_SHA1
       - run:
           name: Context test01
           command: |
