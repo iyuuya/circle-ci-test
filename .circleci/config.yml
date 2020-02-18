@@ -48,6 +48,9 @@ jobs:
             echo $FUGA
             echo $PIYO
       - run:
+          name: run script
+          command: sh .circleci/test.sh
+      - run:
           name: Build example
           command: |
             echo 'Build finished!'
