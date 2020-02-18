@@ -17,6 +17,11 @@ jobs:
             git name-rev $CIRCLE_SHA1
             git branch --contains $CIRCLE_SHA1
       - run:
+          name: Display branch and tag
+          command: |
+            echo $CIRCLE_BRANCH
+            echo $CIRCLE_TAG
+      - run:
           name: Context test01
           command: |
             export CONTEXT_TEST=1
