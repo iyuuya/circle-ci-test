@@ -11,6 +11,11 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
+          name: Display SHA1
+          command: |
+            echo "{{ .Environment.CIRCLE_SHA1 }}"
+            echo "$CIRCLE_SHA1"
+      - run:
           name: Context test01
           command: |
             export CONTEXT_TEST=1
