@@ -41,6 +41,13 @@ jobs:
             echo "EVAL_CONTEXT_TEST: $EVAL_CONTEXT_TEST_ENV"
             echo "HOGE: $HOGE"
       - run:
+          name: source setup_env.sh
+          command: |
+            source .circleci/setup_env.sh
+            echo $HOGE
+            echo $FUGA
+            echo $PIYO
+      - run:
           name: Build example
           command: |
             echo 'Build finished!'
